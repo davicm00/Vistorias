@@ -193,7 +193,7 @@
 
     <footer class="bg-slate-900 text-slate-400">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-            <p>&copy; 2025 MD Engenharia - Segurança Contínua.</p>
+            <p>&copy; 2025 MDA Engenharia - Segurança Contínua.</p>
             <p class="mt-2 text-sm">davicm00@gmail.com | acm.090@gmail.com | (62) 99291-4190 | (61) 99386-2269</p>
         </div>
     </footer>
@@ -277,7 +277,7 @@
             const formData = new FormData(form);
             const object = Object.fromEntries(formData.entries());
             object.subject = `Nova Solicitação de Vistoria - ${object.company || 'Contato Site'}`;
-            object.from_name = "Site Vértice Engenharia";
+            object.from_name = "Site MDA Engenharia";
             const json = JSON.stringify(object);
 
             const originalButtonText = submitButton.innerHTML;
