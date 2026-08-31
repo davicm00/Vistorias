@@ -456,7 +456,7 @@
           <input id="email" name="_replyto" type="email" placeholder="voce@email.com">
         </div>
         <button type="submit" class="btn btn-accent" style="margin-top:8px;">Agendar Minha Vistoria Gratuita</button>
-        <p class="formnote">Formulário conectado via Formspree — ver passo a passo abaixo para ativar.</p>
+        <p class="formnote">
       </form>
 
       <div>
