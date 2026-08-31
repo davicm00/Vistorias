@@ -1,321 +1,244 @@
-<html lang="pt-BR" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnóstico de Segurança Predial - MDA Engenharia</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Corporate Safety -->
-    <!-- Application Structure Plan: A narrative-driven SPA guiding users through a logical AIDA (Attention, Interest, Desire, Action) funnel. 1) Hook with the core question. 2) Interactive "Risk Explorer" to generate interest and personalize the problem. 3) Solution section with an animated counter to create desire for the thorough, free inspection. 4) A clear form for action. This structure is chosen over a static page to actively engage the user, making the risks feel more tangible and the solution more valuable, ultimately aiming for a higher conversion rate. -->
-    <!-- Visualization & Content Choices: 1. Risks (Wear/Tear, Norms): Goal: Inform & Engage -> Viz: Interactive Tabbed Content -> Interaction: User clicks on risk categories (e.g., Electrical) to reveal common issues, making the problem relatable. -> Justification: Breaks down complex info into digestible, user-controlled chunks. -> Method: Vanilla JS. | 2. 50+ Point Check: Goal: Impress & build value -> Viz: Animated number counter + icon grid -> Interaction: Counter animates on scroll. -> Justification: Dynamic effect emphasizes the number's significance more than static text. -> Method: Vanilla JS + IntersectionObserver. All icons are non-SVG Unicode or inline-path characters. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .tab-active { 
-            background-color: #f97316; /* orange-500 */
-            color: white;
-        }
-        .tab-inactive {
-            background-color: #e2e8f0; /* slate-200 */
-            color: #475569; /* slate-600 */
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDA Engenharia | Diagnóstico de Segurança Predial e Manutenção</title>
+<meta name="description" content="Vistoria técnica gratuita de segurança predial em Anápolis e região. Elétrica, hidráulica, PPCI e acompanhamento de obras. CREA 20.853/D-GO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-dark:#0F1B2B;
+    --bg-dark-2:#16273B;
+    --paper:#EEF1F0;
+    --paper-2:#E4E9E8;
+    --ink:#141E2A;
+    --line:#C7D0D9;
+    --line-dark:#2A3B52;
+    --accent:#E8A33D;
+    --accent-ink:#3A2607;
+    --alert:#C1392B;
+    --steel:#6B7A8F;
+    --white:#F7F9F8;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'IBM Plex Sans',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:0.04em;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  img,svg{display:block;max-width:100%;}
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px;
+  }
+  .blueprint{
+    background-color:var(--bg-dark);
+    background-image:
+      linear-gradient(var(--line-dark) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-dark) 1px, transparent 1px);
+    background-size:40px 40px;
+    color:var(--white);
+    position:relative;
+  }
+  .blueprint::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at 20% 0%, rgba(232,163,61,0.08), transparent 55%);
+    pointer-events:none;
+  }
+  .crop{position:relative;}
+  .crop::before,.crop::after{
+    content:"";position:absolute;width:14px;height:14px;
+    border-color:var(--accent);border-style:solid;opacity:0.7;
+  }
+  .crop::before{top:0;left:0;border-width:2px 0 0 2px;}
+  .crop::after{bottom:0;right:0;border-width:0 2px 2px 0;}
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(15,27,43,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1120px;margin:0 auto;}
+  .brand{color:var(--white);font-family:'Space Grotesk';font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:22px;height:22px;flex:none;}
+  .navlinks{display:flex;gap:28px;align-items:center;}
+  .navlinks a{color:#C7D2DE;font-size:0.92rem;transition:color .15s;}
+  .navlinks a:hover{color:var(--accent);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:var(--radius);
+    font-weight:600;font-size:0.92rem;border:1px solid transparent;
+    cursor:pointer;transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-accent{background:var(--accent);color:var(--accent-ink);}
+  .btn-accent:hover{box-shadow:0 6px 18px rgba(232,163,61,0.35);}
+  .btn-ghost{border-color:var(--line-dark);color:var(--white);background:transparent;}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-outline-dark{border-color:var(--line);color:var(--ink);background:transparent;}
+  .btn-outline-dark:hover{border-color:var(--ink);}
+  .btn-sm{padding:9px 16px;font-size:0.85rem;}
+  .navcta{display:none;}
+  @media(min-width:720px){.navcta{display:inline-flex;}}
+  .navlinks{display:none;}
+  @media(min-width:900px){.navlinks{display:flex;}}
+  .hero{padding:96px 0 88px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    color:var(--accent);font-size:0.78rem;text-transform:uppercase;
+    padding-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);}
+  h1.hero-title{
+    font-size:clamp(2.1rem,5vw,3.4rem);
+    color:var(--white);
+    max-width:760px;
+    line-height:1.08;
+  }
+  .hero-sub{
+    margin-top:22px;max-width:600px;color:#C7D2DE;font-size:1.08rem;
+  }
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+  .trust-strip{
+    margin-top:64px;border-top:1px solid var(--line-dark);padding-top:26px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;
+  }
+  .trust-item{color:#9FB0C4;font-size:0.86rem;display:flex;gap:10px;align-items:flex-start;}
+  .trust-item b{color:var(--white);display:block;font-family:'Space Grotesk';font-size:0.95rem;margin-bottom:2px;}
+  .trust-dot{color:var(--accent);}
+  section{padding:84px 0;}
+  .sec-label{
+    font-size:0.78rem;color:var(--steel);text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .sec-label::before{content:"";width:26px;height:1px;background:var(--steel);}
+  h2.sec-title{font-size:clamp(1.6rem,3.4vw,2.3rem);max-width:640px;}
+  .sec-desc{max-width:620px;color:var(--steel);margin-top:14px;font-size:1.02rem;}
+  .riscos{background:var(--paper);}
+  .tabbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:38px;border-bottom:1px solid var(--line);padding-bottom:0;}
+  .tabbtn{
+    padding:12px 18px;font-size:0.88rem;font-weight:600;color:var(--steel);
+    background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;
+    font-family:'IBM Plex Sans';
+  }
+  .tabbtn.active{color:var(--ink);border-bottom-color:var(--accent);}
+  .tabpanel{display:none;padding-top:34px;}
+  .tabpanel.active{display:grid;grid-template-columns:1fr;gap:28px;}
+  @media(min-width:760px){.tabpanel.active{grid-template-columns:0.9fr 1.1fr;align-items:center;}}
+  .risco-list{list-style:none;display:flex;flex-direction:column;gap:14px;}
+  .risco-list li{
+    display:flex;gap:12px;align-items:flex-start;font-size:0.98rem;
+  }
+  .risco-list li::before{
+    content:"";flex:none;width:8px;height:8px;margin-top:7px;
+    background:var(--alert);
+  }
+  .risco-media{border:1px solid var(--line);background:var(--paper-2);}
+  .risco-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(15%) contrast(1.03);}
+  .risco-media figcaption{
+    font-size:0.72rem;color:var(--steel);padding:10px 12px;border-top:1px solid var(--line);
+    letter-spacing:0.06em;
+  }
+  .solucao{background:var(--ink);color:var(--white);}
+  .solucao .sec-label,.solucao .sec-label::before{color:var(--accent);background:var(--accent);}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+  .chip{
+    font-family:'IBM Plex Mono';font-size:0.82rem;
+    border:1px solid var(--line-dark);color:#C7D2DE;
+    padding:9px 14px;border-radius:20px;
+  }
+  .counter-row{
+    margin-top:52px;display:flex;flex-wrap:wrap;gap:48px;align-items:flex-end;
+    border-top:1px solid var(--line-dark);padding-top:32px;
+  }
+  .counter{font-family:'Space Grotesk';font-size:3.2rem;color:var(--accent);font-weight:700;}
+  .counter-label{color:#9FB0C4;font-size:0.9rem;max-width:220px;}
+  .servicos{background:var(--paper-2);}
+  .grid4{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);margin-top:40px;border:1px solid var(--line);}
+  @media(min-width:640px){.grid4{grid-template-columns:1fr 1fr;}}
+  @media(min-width:980px){.grid4{grid-template-columns:repeat(4,1fr);}}
+  .svcard{
+    background:var(--paper);padding:30px 26px;display:flex;flex-direction:column;gap:14px;
+  }
+  .svcard .num{font-family:'IBM Plex Mono';color:var(--steel);font-size:0.8rem;}
+  .svcard h3{font-size:1.08rem;}
+  .svcard p{color:var(--steel);font-size:0.92rem;flex:1;}
+  .svcard a{font-size:0.86rem;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:6px;}
+  .svcard a:hover{color:var(--alert);}
+  .processo{background:var(--paper);}
+  .steps{display:grid;grid-template-columns:1fr;gap:0;margin-top:44px;}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);}}
+  .step{padding:24px 26px 24px 0;border-top:1px solid var(--line);position:relative;}
+  @media(min-width:760px){.step{border-top:none;border-left:1px solid var(--line);padding:6px 26px;}
+    .step:first-child{border-left:none;padding-left:0;}}
+  .step .n{font-family:'IBM Plex Mono';color:var(--accent);font-size:0.82rem;}
+  .step h3{margin-top:10px;font-size:1.05rem;}
+  .step p{color:var(--steel);font-size:0.92rem;margin-top:8px;}
+  .cta-final{background:var(--bg-dark);}
+  .cta-grid{display:grid;grid-template-columns:1fr;gap:48px;margin-top:20px;}
+  @media(min-width:900px){.cta-grid{grid-template-columns:1fr 1fr;}}
+  form{display:flex;flex-direction:column;gap:14px;}
+  label{font-size:0.82rem;color:#9FB0C4;font-family:'IBM Plex Mono';}
+  input,textarea{
+    background:var(--bg-dark-2);border:1px solid var(--line-dark);color:var(--white);
+    padding:13px 14px;border-radius:var(--radius);font-family:'IBM Plex Sans';font-size:0.96rem;
+  }
+  input::placeholder,textarea::placeholder{color:#5E7089;}
+  .whatsapp-inline{
+    margin-top:6px;border:1px dashed var(--line-dark);padding:20px;color:#9FB0C4;font-size:0.88rem;
+  }
+  .whatsapp-inline a{color:var(--accent);font-weight:600;}
+  .formnote{font-size:0.78rem;color:#7488A0;margin-top:2px;}
+  footer{background:var(--bg-dark);border-top:1px solid var(--line-dark);padding:40px 0;}
+  .footgrid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;color:#9FB0C4;font-size:0.86rem;}
+  .footgrid a:hover{color:var(--accent);}
+  .footbrand{color:var(--white);font-family:'Space Grotesk';font-weight:700;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
 </head>
-<body class="bg-slate-50 text-slate-700">
+<body>
 
-    <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0">
-                    <a href="#" class="text-2xl font-bold text-slate-800">MDA Engenharia</a>
-                </div>
-                <nav class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#riscos" class="text-slate-600 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">Riscos Ocultos</a>
-                        <a href="#solucao" class="text-slate-600 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors">Nossa Solução</a>
-                        <a href="#agendar" class="bg-orange-500 text-white hover:bg-orange-600 px-4 py-2 rounded-md text-sm font-bold transition-transform hover:scale-105">Agendar Vistoria Gratuita</a>
-                    </div>
-                </nav>
-                <div class="md:hidden">
-                    <a href="#agendar" class="bg-orange-500 text-white hover:bg-orange-600 px-4 py-2 rounded-md text-sm font-bold transition-transform hover:scale-105">Agendar</a>
-                </div>
-            </div>
-        </div>
-    </header>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 20L12 4L21 20" stroke="#E8A33D" stroke-width="2" stroke-linejoin="round"/><path d="M7.5 20L12 11.5L16.5 20" stroke="#F7F9F8" stroke-width="2" stroke-linejoin="round"/></svg>
+      MDA Engenharia
+    </div>
+    <nav class="navlinks">
+      <a href="#riscos">Riscos Ocultos</a>
+      <a href="#solucao">Vistoria Gratuita</a>
+      <a href="#servicos">Outros Serviços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a href="#contato" class="btn btn-accent btn-sm navcta">Agendar Vistoria</a>
+  </div>
+</header>
 
-    <main>
-        <section class="pt-32 pb-20 bg-white">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight">
-                    O seu estabelecimento é <span class="text-orange-500">realmente</span> seguro?
-                </h1>
-                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-600">
-                    Um alvará e um projeto aprovado são o ponto de partida, não a garantia final de segurança. Descubra os riscos silenciosos que podem estar presentes agora no seu imóvel.
-                </p>
-                <a href="#riscos" class="mt-10 inline-block bg-slate-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform hover:scale-105 shadow-lg">
-                    Explorar Riscos Comuns
-                </a>
-            </div>
-        </section>
+<section class="hero blueprint">
+  <div class="wrap">
+    <div class="eyebrow mono">DIAGNÓSTICO TÉCNICO · CREA 20.853/D-GO</div>
+    <h1 class="hero-title">Alvará aprovado não é sinônimo de prédio seguro.</h1>
+    <p class="hero-sub">O tempo, o uso diário e as normas que mudaram desde a aprovação do projeto abrem falhas que não existiam no papel. Descubra agora os riscos ocultos do seu imóvel — com uma vistoria técnica sem custo.</p>
+    <div class="hero-ctas">
+      <a href="#contato" class="btn btn-accent">Agendar Vistoria Gratuita</a>
+      <a href="#riscos" class="btn btn-ghost">Ver Riscos Comuns ↓</a>
+    </div>
 
-        <section id="riscos" class="py-20 bg-slate-100">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">A Verdadeira Segurança é Contínua</h2>
-                    <p class="mt-4 text-lg text-slate-600">
-                        O tempo, o uso e as novas regulamentações criam vulnerabilidades que não existiam no projeto original. Interaja com as abas abaixo para entender os pontos críticos que mais exigem atenção.
-                    </p>
-                </div>
-
-                <div class="mt-12 max-w-4xl mx-auto">
-                    <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8" id="risk-tabs">
-                        <button data-tab="eletrica" class="risk-tab tab-active px-4 py-2 md:px-6 md:py-3 font-semibold rounded-lg transition-colors">Instalações Elétricas & Gás</button>
-                        <button data-tab="incendio" class="risk-tab tab-inactive px-4 py-2 md:px-6 md:py-3 font-semibold rounded-lg transition-colors">Combate a Incêndio</button>
-                        <button data-tab="estrutura" class="risk-tab tab-inactive px-4 py-2 md:px-6 md:py-3 font-semibold rounded-lg transition-colors">Estrutura e Infiltrações</button>
-                        <button data-tab="fuga" class="risk-tab tab-inactive px-4 py-2 md:px-6 md:py-3 font-semibold rounded-lg transition-colors">Sinalização e Rotas de Fuga</button>
-                    </div>
-
-                    <div id="risk-content" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg min-h-[20rem]">
-                        <div data-content="eletrica" class="risk-pane">
-                            <h3 class="font-bold text-2xl text-slate-800 mb-4">Pontos de Atenção: Elétrica e Gás</h3>
-                            <ul class="space-y-3 text-slate-600">
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Quadros de energia desatualizados ou sem identificação correta.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Fiação exposta, ressecada ou com gambiarras.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Falta de aterramento adequado (SPDA/Para-raios) ou manutenção.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Vazamentos ou má conservação nas tubulações de gás.</li>
-                            </ul>
-                        </div>
-                        <div data-content="incendio" class="risk-pane hidden">
-                             <h3 class="font-bold text-2xl text-slate-800 mb-4">Pontos de Atenção: Combate a Incêndio</h3>
-                            <ul class="space-y-3 text-slate-600">
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Extintores de incêndio vencidos, obstruídos ou em locais errados.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Hidrantes e mangueiras sem teste de pressão ou com vazamentos.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Alarmes e detectores de fumaça inoperantes ou sem testes periódicos.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Portas corta-fogo sem a devida vedação ou travadas abertas.</li>
-                            </ul>
-                        </div>
-                        <div data-content="estrutura" class="risk-pane hidden">
-                            <h3 class="font-bold text-2xl text-slate-800 mb-4">Pontos de Atenção: Estrutura e Infiltrações</h3>
-                             <ul class="space-y-3 text-slate-600">
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Sinais de infiltração, mofo ou umidade em paredes e tetos.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Fissuras, trincas ou rachaduras em vigas, pilares e lajes.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Corrosão em armaduras expostas ou em estruturas metálicas.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Desgaste ou danos em revestimentos, pisos e fachadas.</li>
-                            </ul>
-                        </div>
-                        <div data-content="fuga" class="risk-pane hidden">
-                            <h3 class="font-bold text-2xl text-slate-800 mb-4">Pontos de Atenção: Sinalização e Fuga</h3>
-                             <ul class="space-y-3 text-slate-600">
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Rotas de fuga obstruídas por móveis, estoque ou lixo.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Sinalização de emergência (saída, extintores) apagada, danificada ou inexistente.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Iluminação de emergência que não funciona ou tem baixa autonomia.</li>
-                                <li class="flex items-start"><span class="text-orange-500 font-bold mr-3">✔</span>Guarda-corpos e corrimãos frouxos, com altura inadequada ou corroídos.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="solucao" class="py-20 bg-white">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Nossa Solução: Um Diagnóstico Completo e Gratuito</h2>
-                        <p class="mt-4 text-lg text-slate-600">
-                            Para garantir sua total tranquilidade, oferecemos uma vistoria técnica completa, sem custo e sem compromisso. Nossa equipe de engenheiros qualificados avalia todos os aspectos vitais da segurança do seu edifício.
-                        </p>
-                        <div class="mt-8 grid grid-cols-2 gap-6 text-slate-700">
-                            <div class="flex items-center"><span class="text-green-500 mr-2">●</span> Acessibilidade</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-2">●</span> Estrutura</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-2">●</span> Sistema de Incêndio</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-2">●</span> Instalações Elétricas</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-2">●</span> Rotas de Fuga</div>
-                            <div class="flex items-center"><span class="text-green-500 mr-2">●</span> Sistema de Gás</div>
-                        </div>
-                    </div>
-                    <div class="bg-slate-800 text-white p-8 sm:p-12 rounded-2xl shadow-2xl text-center">
-                        <p class="text-xl font-semibold text-slate-300">Avaliamos mais de</p>
-                        <p id="counter" class="text-7xl md:text-8xl font-extrabold text-orange-400 my-2">0</p>
-                        <p class="text-xl font-semibold text-slate-300">pontos críticos de segurança</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="agendar" class="py-20 bg-slate-100">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                 <div class="max-w-2xl mx-auto text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Proteja seu Patrimônio. Comece Hoje.</h2>
-                    <p class="mt-4 text-lg text-slate-600 mb-8">
-                        Preencha o formulário e agende sua vistoria gratuita. Nossa equipe entrará em contato em até 24 horas para confirmar o melhor dia e horário para você.
-                    </p>
-                    <div id="form-wrapper" class="bg-white p-6 sm:p-8 rounded-xl shadow-lg text-left transition-all duration-500">
-                        <form id="contactForm">
-                            <input type="hidden" name="access_key" value="eb867af9-4fbe-4bdc-940f-df9bdccb9f8e">
-                            <div class="grid sm:grid-cols-2 gap-4 mb-4">
-                                <div>
-                                    <label for="name" class="block text-sm font-bold text-slate-700 mb-1">Nome</label>
-                                    <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
-                                </div>
-                                <div>
-                                    <label for="phone" class="block text-sm font-bold text-slate-700 mb-1">Telefone / WhatsApp</label>
-                                    <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label for="company" class="block text-sm font-bold text-slate-700 mb-1">Empresa / Condomínio</label>
-                                <input type="text" id="company" name="company" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
-                            </div>
-                             <div class="mb-6">
-                                <label for="email" class="block text-sm font-bold text-slate-700 mb-1">E-mail de Contato</label>
-                                <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" required>
-                            </div>
-                            <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg text-lg transition-transform hover:scale-105">
-                                Agendar Minha Vistoria Gratuita
-                            </button>
-                        </form>
-                    </div>
-                    <div id="thank-you-message" class="hidden bg-green-100 border-l-4 border-green-500 text-green-700 p-6 rounded-xl shadow-lg text-left">
-                        <h4 class="font-bold text-xl mb-2">Obrigado!</h4>
-                        <p>Recebemos sua solicitação. Nossa equipe de especialistas entrará em contato em breve para confirmar o melhor dia e horário para a sua vistoria gratuita.</p>
-                    </div>
-                    <div id="error-message" class="hidden mt-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-lg text-left">
-                        <h4 class="font-bold">Ocorreu um erro.</h4>
-                        <p>Não foi possível enviar sua solicitação. Por favor, tente novamente ou entre em contato diretamente.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-slate-900 text-slate-400">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-            <p>&copy; 2025 MDA Engenharia - Segurança Contínua.</p>
-            <p class="mt-2 text-sm">davicm00@gmail.com | acm.090@gmail.com | (62) 99291-4190 | (61) 99386-2269</p>
-        </div>
-    </footer>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        
-        const riskTabs = document.querySelectorAll('.risk-tab');
-        const riskPanes = document.querySelectorAll('.risk-pane');
-
-        riskTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                riskTabs.forEach(t => {
-                    t.classList.remove('tab-active');
-                    t.classList.add('tab-inactive');
-                });
-                tab.classList.add('tab-active');
-                tab.classList.remove('tab-inactive');
-
-                const targetContent = tab.getAttribute('data-tab');
-                riskPanes.forEach(pane => {
-                    if (pane.getAttribute('data-content') === targetContent) {
-                        pane.classList.remove('hidden');
-                    } else {
-                        pane.classList.add('hidden');
-                    }
-                });
-            });
-        });
-
-        const counterElement = document.getElementById('counter');
-        const targetNumber = 50;
-        let animationTriggered = false;
-
-        const animateCounter = () => {
-            let currentNumber = 0;
-            const increment = targetNumber / 100;
-            const interval = setInterval(() => {
-                currentNumber += increment;
-                if (currentNumber >= targetNumber) {
-                    clearInterval(interval);
-                    counterElement.innerText = targetNumber;
-                } else {
-                    counterElement.innerText = Math.ceil(currentNumber);
-                }
-            }, 20);
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !animationTriggered) {
-                    animateCounter();
-                    animationTriggered = true;
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        if (counterElement) {
-             observer.observe(counterElement);
-        }
-
-        const form = document.getElementById('contactForm');
-        const formWrapper = document.getElementById('form-wrapper');
-        const thankYouMessage = document.getElementById('thank-you-message');
-        const errorMessage = document.getElementById('error-message');
-        const submitButton = form.querySelector('button[type="submit"]');
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            
-            // ATENÇÃO: Substitua 'eb867af9-4fbe-4bdc-940f-df9bdccb9f8e' no campo 'hidden' do formulário.
-            // Siga as instruções no arquivo instrucoes_email.md
-            const accessKeyInput = form.querySelector('input[name="access_key"]');
-            if (accessKeyInput.value === "eb867af9-4fbe-4bdc-940f-df9bdccb9f8e") {
-                errorMessage.querySelector('p').textContent = "A chave de acesso do formulário não foi configurada.";
-                errorMessage.classList.remove('hidden');
-                return;
-            }
-
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData.entries());
-            object.subject = `Nova Solicitação de Vistoria - ${object.company || 'Contato Site'}`;
-            object.from_name = "Site MDA Engenharia";
-            const json = JSON.stringify(object);
-
-            const originalButtonText = submitButton.innerHTML;
-            submitButton.innerHTML = 'Enviando...';
-            submitButton.disabled = true;
-            errorMessage.classList.add('hidden');
-
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                let jsonResponse = await response.json();
-                if (response.status == 200) {
-                    formWrapper.classList.add('hidden');
-                    thankYouMessage.classList.remove('hidden');
-                } else {
-                    console.error(jsonResponse);
-                    errorMessage.querySelector('p').textContent = jsonResponse.message || "Não foi possível enviar sua solicitação. Tente novamente.";
-                    errorMessage.classList.remove('hidden');
-                    submitButton.innerHTML = originalButtonText;
-                    submitButton.disabled = false;
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                errorMessage.querySelector('p').textContent = "Ocorreu um erro de rede. Verifique sua conexão e tente novamente.";
-                errorMessage.classList.remove('hidden');
-                submitButton.innerHTML = originalButtonText;
-                submitButton.disabled = false;
-            });
-        });
-
-    });
-    </script>
-</body>
-</html>
+    <div class="trust-strip">
+      <div class="trust-item"><span class="trust-dot">●</span><span><b>13 anos</b>de atuação em fiscalização, contratos e engenharia de infraestrutura</span></div>
+      <div class="trust-item"><span class="trust-dot">●</span><span><b>CREA 20.853/D-GO</b>com visto ativo em CREA-DF</span></div>
+      <div class="trust-item"><span class="trust-dot">●</span><span><b>Anápolis e Região</b>atendimento presencial e
