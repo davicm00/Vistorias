@@ -461,7 +461,7 @@
 
       <div>
         <div class="whatsapp-inline">
-          Prefere resolver agora? Chame direto no <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20vistoria%20gratuita.">WhatsApp (62) 99291-4190</a> — resposta em até 24h.
+          Prefere resolver agora? Chame direto no <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20vistoria%20gratuita.">WhatsApp (61) 99386-2269</a> — resposta em até 24h.
         </div>
         <div class="whatsapp-inline" style="margin-top:14px;">
           Prefere e-mail? Escreva para <a href="mailto:mdaengenharia.contato@gmail.com">mdaengenharia.contato@gmail.com</a>
