@@ -383,25 +383,25 @@
         <span class="num mono">01</span>
         <h3>Instalações Elétricas</h3>
         <p>Serviços elétricos, CFTV, alarmes e manutenção técnica especializada.</p>
-        <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20instala%C3%A7%C3%B5es%20el%C3%A9tricas.">Solicitar orçamento →</a>
+        <a href="https://wa.me/5561993862269?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20instala%C3%A7%C3%B5es%20el%C3%A9tricas.">Solicitar orçamento →</a>
       </div>
       <div class="svcard">
         <span class="num mono">02</span>
         <h3>Instalações Hidráulicas</h3>
         <p>Reparos, instalações e manutenção com precisão técnica e sem desperdício.</p>
-        <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20instala%C3%A7%C3%B5es%20hidr%C3%A1ulicas.">Solicitar orçamento →</a>
+        <a href="https://wa.me/5561993862269?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20instala%C3%A7%C3%B5es%20hidr%C3%A1ulicas.">Solicitar orçamento →</a>
       </div>
       <div class="svcard">
         <span class="num mono">03</span>
         <h3>Projetos &amp; PPCI</h3>
         <p>Projetos de engenharia, prevenção contra incêndio (PPCI) e segurança do trabalho.</p>
-        <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20projetos%20de%20PPCI.">Solicitar orçamento →</a>
+        <a href="https://wa.me/5561993862269?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20projetos%20de%20PPCI.">Solicitar orçamento →</a>
       </div>
       <div class="svcard">
         <span class="num mono">04</span>
         <h3>Acompanhamento de Obras</h3>
         <p>Consultoria predial, vistorias técnicas e acompanhamento rigoroso de cronograma.</p>
-        <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20acompanhamento%20de%20obras.">Solicitar orçamento →</a>
+        <a href="https://wa.me/5561993862269?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20acompanhamento%20de%20obras.">Solicitar orçamento →</a>
       </div>
     </div>
   </div>
@@ -457,11 +457,10 @@
         </div>
         <button type="submit" class="btn btn-accent" style="margin-top:8px;">Agendar Minha Vistoria Gratuita</button>
         <p class="formnote">
-      </form>
-
+   
       <div>
         <div class="whatsapp-inline">
-          Prefere resolver agora? Chame direto no <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20vistoria%20gratuita.">WhatsApp (61) 99386-2269</a> — resposta em até 24h.
+          Prefere resolver agora? Chame direto no <a href="https://wa.me/5561993862269?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20vistoria%20gratuita.">WhatsApp (61) 99386-2269</a> — resposta em até 24h.
         </div>
         <div class="whatsapp-inline" style="margin-top:14px;">
           Prefere e-mail? Escreva para <a href="mailto:mdaengenharia.contato@gmail.com">mdaengenharia.contato@gmail.com</a>
