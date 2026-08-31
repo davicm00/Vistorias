@@ -1,29 +1,530 @@
-MDA Engenharia — Site
-Site institucional da MDA Engenharia, preparado para publicação no GitHub Pages.
-Estrutura
-`index.html` — página principal
-`imagens/` — imagens/ilustrações usadas nas abas de riscos
-Publicar no GitHub Pages
-Crie um novo repositório no GitHub.
-Envie todos os arquivos e pastas deste projeto, mantendo a estrutura.
-Vá em Settings → Pages.
-Em Build and deployment, selecione:
-Source: `Deploy from a branch`
-Branch: `main`
-Folder: `/ (root)`
-Salve e aguarde a publicação.
-O arquivo inicial já está configurado como `index.html`.
-Formulário de contato
-O formulário está preparado para Formspree, mas ainda contém:
-`https://formspree.io/f/SEU_ID_AQUI`
-Para receber os contatos por e-mail:
-Crie uma conta no Formspree.
-Crie um formulário.
-Copie o endpoint fornecido pelo Formspree.
-Abra `index.html`.
-Substitua `SEU_ID_AQUI` pelo ID real.
-Faça o upload/commit novamente no GitHub.
-WhatsApp
-Os botões e links de WhatsApp já estão configurados para o número informado no arquivo original.
-Observação sobre imagens
-Foram incluídas ilustrações SVG locais para que o site funcione imediatamente no GitHub Pages sem depender de arquivos JPG que não estavam presentes no HTML fornecido. Elas podem ser substituídas posteriormente pelas fotografias reais, mantendo os mesmos nomes/endereços ou ajustando os `src` no `index.html`.
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDA Engenharia | Diagnóstico de Segurança Predial e Manutenção</title>
+<meta name="description" content="Vistoria técnica gratuita de segurança predial em Anápolis, Goiânia, Brasília e região. Elétrica, hidráulica, PPCI e acompanhamento de obras. CREA 20.853/D-GO | CREA 25.576/D-GO | CREA 1019077042/D-GO.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MDA Engenharia | Diagnóstico de Segurança Predial e Manutenção">
+<meta property="og:description" content="Vistoria técnica de segurança predial em Anápolis e região.">
+<meta name="theme-color" content="#0F1B2B">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-dark:#0F1B2B;
+    --bg-dark-2:#16273B;
+    --paper:#EEF1F0;
+    --paper-2:#E4E9E8;
+    --ink:#141E2A;
+    --line:#C7D0D9;
+    --line-dark:#2A3B52;
+    --accent:#E8A33D;
+    --accent-ink:#3A2607;
+    --alert:#C1392B;
+    --steel:#6B7A8F;
+    --white:#F7F9F8;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'IBM Plex Sans',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:0.04em;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  img,svg{display:block;max-width:100%;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px;
+  }
+
+  /* blueprint grid backdrop for dark sections */
+  .blueprint{
+    background-color:var(--bg-dark);
+    background-image:
+      linear-gradient(var(--line-dark) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-dark) 1px, transparent 1px);
+    background-size:40px 40px;
+    color:var(--white);
+    position:relative;
+  }
+  .blueprint::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at 20% 0%, rgba(232,163,61,0.08), transparent 55%);
+    pointer-events:none;
+  }
+
+  /* corner crop marks, technical drawing feel */
+  .crop{position:relative;}
+  .crop::before,.crop::after{
+    content:"";position:absolute;width:14px;height:14px;
+    border-color:var(--accent);border-style:solid;opacity:0.7;
+  }
+  .crop::before{top:0;left:0;border-width:2px 0 0 2px;}
+  .crop::after{bottom:0;right:0;border-width:0 2px 2px 0;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(15,27,43,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;max-width:1120px;margin:0 auto;}
+  .brand{color:var(--white);font-family:'Space Grotesk';font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:22px;height:22px;flex:none;}
+  .navlinks{display:flex;gap:28px;align-items:center;}
+  .navlinks a{color:#C7D2DE;font-size:0.92rem;transition:color .15s;}
+  .navlinks a:hover{color:var(--accent);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;border-radius:var(--radius);
+    font-weight:600;font-size:0.92rem;border:1px solid transparent;
+    cursor:pointer;transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-accent{background:var(--accent);color:var(--accent-ink);}
+  .btn-accent:hover{box-shadow:0 6px 18px rgba(232,163,61,0.35);}
+  .btn-ghost{border-color:var(--line-dark);color:var(--white);background:transparent;}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-outline-dark{border-color:var(--line);color:var(--ink);background:transparent;}
+  .btn-outline-dark:hover{border-color:var(--ink);}
+  .btn-sm{padding:9px 16px;font-size:0.85rem;}
+  .navcta{display:none;}
+  @media(min-width:720px){.navcta{display:inline-flex;}}
+  .navlinks{display:none;}
+  @media(min-width:900px){.navlinks{display:flex;}}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:96px 0 88px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    color:var(--accent);font-size:0.78rem;text-transform:uppercase;
+    padding-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);}
+  h1.hero-title{
+    font-size:clamp(2.1rem,5vw,3.4rem);
+    color:var(--white);
+    max-width:760px;
+    line-height:1.08;
+  }
+  .hero-sub{
+    margin-top:22px;max-width:600px;color:#C7D2DE;font-size:1.08rem;
+  }
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+
+  .trust-strip{
+    margin-top:64px;border-top:1px solid var(--line-dark);padding-top:26px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;
+  }
+  .trust-item{color:#9FB0C4;font-size:0.86rem;display:flex;gap:10px;align-items:flex-start;}
+  .trust-item b{color:var(--white);display:block;font-family:'Space Grotesk';font-size:0.95rem;margin-bottom:2px;}
+  .trust-dot{color:var(--accent);}
+
+  /* ---------- SECTION HEADERS (paper) ---------- */
+  section{padding:84px 0;}
+  .sec-label{
+    font-size:0.78rem;color:var(--steel);text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .sec-label::before{content:"";width:26px;height:1px;background:var(--steel);}
+  h2.sec-title{font-size:clamp(1.6rem,3.4vw,2.3rem);max-width:640px;}
+  .sec-desc{max-width:620px;color:var(--steel);margin-top:14px;font-size:1.02rem;}
+
+  /* ---------- RISCOS (tabs) ---------- */
+  .riscos{background:var(--paper);}
+  .tabbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:38px;border-bottom:1px solid var(--line);padding-bottom:0;}
+  .tabbtn{
+    padding:12px 18px;font-size:0.88rem;font-weight:600;color:var(--steel);
+    background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;
+    font-family:'IBM Plex Sans';
+  }
+  .tabbtn.active{color:var(--ink);border-bottom-color:var(--accent);}
+  .tabpanel{display:none;padding-top:34px;}
+  .tabpanel.active{display:grid;grid-template-columns:1fr;gap:28px;}
+  @media(min-width:760px){.tabpanel.active{grid-template-columns:0.9fr 1.1fr;align-items:center;}}
+  .risco-list{list-style:none;display:flex;flex-direction:column;gap:14px;}
+  .risco-list li{
+    display:flex;gap:12px;align-items:flex-start;font-size:0.98rem;
+  }
+  .risco-list li::before{
+    content:"";flex:none;width:8px;height:8px;margin-top:7px;
+    background:var(--alert);
+  }
+  .risco-media{border:1px solid var(--line);background:var(--paper-2);}
+  .risco-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(15%) contrast(1.03);}
+  .risco-media figcaption{
+    font-size:0.72rem;color:var(--steel);padding:10px 12px;border-top:1px solid var(--line);
+    letter-spacing:0.06em;
+  }
+
+  /* ---------- SOLUÇÃO ---------- */
+  .solucao{background:var(--ink);color:var(--white);}
+  .solucao .sec-label,.solucao .sec-label::before{color:var(--accent);background:var(--accent);}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+  .chip{
+    font-family:'IBM Plex Mono';font-size:0.82rem;
+    border:1px solid var(--line-dark);color:#C7D2DE;
+    padding:9px 14px;border-radius:20px;
+  }
+  .counter-row{
+    margin-top:52px;display:flex;flex-wrap:wrap;gap:48px;align-items:flex-end;
+    border-top:1px solid var(--line-dark);padding-top:32px;
+  }
+  .counter{font-family:'Space Grotesk';font-size:3.2rem;color:var(--accent);font-weight:700;}
+  .counter-label{color:#9FB0C4;font-size:0.9rem;max-width:220px;}
+
+  /* ---------- OUTROS SERVIÇOS ---------- */
+  .servicos{background:var(--paper-2);}
+  .grid4{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);margin-top:40px;border:1px solid var(--line);}
+  @media(min-width:640px){.grid4{grid-template-columns:1fr 1fr;}}
+  @media(min-width:980px){.grid4{grid-template-columns:repeat(4,1fr);}}
+  .svcard{
+    background:var(--paper);padding:30px 26px;display:flex;flex-direction:column;gap:14px;
+  }
+  .svcard .num{font-family:'IBM Plex Mono';color:var(--steel);font-size:0.8rem;}
+  .svcard h3{font-size:1.08rem;}
+  .svcard p{color:var(--steel);font-size:0.92rem;flex:1;}
+  .svcard a{font-size:0.86rem;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:6px;}
+  .svcard a:hover{color:var(--alert);}
+
+  /* ---------- PROCESSO ---------- */
+  .processo{background:var(--paper);}
+  .steps{display:grid;grid-template-columns:1fr;gap:0;margin-top:44px;}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);}}
+  .step{padding:24px 26px 24px 0;border-top:1px solid var(--line);position:relative;}
+  @media(min-width:760px){.step{border-top:none;border-left:1px solid var(--line);padding:6px 26px;}
+    .step:first-child{border-left:none;padding-left:0;}}
+  .step .n{font-family:'IBM Plex Mono';color:var(--accent);font-size:0.82rem;}
+  .step h3{margin-top:10px;font-size:1.05rem;}
+  .step p{color:var(--steel);font-size:0.92rem;margin-top:8px;}
+
+  /* ---------- FORM ---------- */
+  .cta-final{background:var(--bg-dark);}
+  .cta-grid{display:grid;grid-template-columns:1fr;gap:48px;margin-top:20px;}
+  @media(min-width:900px){.cta-grid{grid-template-columns:1fr 1fr;}}
+  form{display:flex;flex-direction:column;gap:14px;}
+  label{font-size:0.82rem;color:#9FB0C4;font-family:'IBM Plex Mono';}
+  input,textarea{
+    background:var(--bg-dark-2);border:1px solid var(--line-dark);color:var(--white);
+    padding:13px 14px;border-radius:var(--radius);font-family:'IBM Plex Sans';font-size:0.96rem;
+  }
+  input::placeholder,textarea::placeholder{color:#5E7089;}
+  .whatsapp-inline{
+    margin-top:6px;border:1px dashed var(--line-dark);padding:20px;color:#9FB0C4;font-size:0.88rem;
+  }
+  .whatsapp-inline a{color:var(--accent);font-weight:600;}
+  .formnote{font-size:0.78rem;color:#7488A0;margin-top:2px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--bg-dark);border-top:1px solid var(--line-dark);padding:40px 0;}
+  .footgrid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;color:#9FB0C4;font-size:0.86rem;}
+  .footgrid a:hover{color:var(--accent);}
+  .footbrand{color:var(--white);font-family:'Space Grotesk';font-weight:700;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 20L12 4L21 20" stroke="#E8A33D" stroke-width="2" stroke-linejoin="round"/><path d="M7.5 20L12 11.5L16.5 20" stroke="#F7F9F8" stroke-width="2" stroke-linejoin="round"/></svg>
+      MDA Engenharia
+    </div>
+    <nav class="navlinks">
+      <a href="#riscos">Riscos Ocultos</a>
+      <a href="#solucao">Vistoria Gratuita</a>
+      <a href="#servicos">Outros Serviços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a href="#contato" class="btn btn-accent btn-sm navcta">Agendar Vistoria</a>
+  </div>
+</header>
+
+<section class="hero blueprint">
+  <div class="wrap">
+    <div class="eyebrow mono">DIAGNÓSTICO TÉCNICO · CREA 20.853/D-GO | CREA 25.576/D-GO | CREA 1019077042/D-GO</div>
+    <h1 class="hero-title">Alvará aprovado não é sinônimo de prédio seguro.</h1>
+    <p class="hero-sub">O tempo, o uso diário e as normas que mudaram desde a aprovação do projeto abrem falhas que não existiam no papel. Descubra agora os riscos ocultos do seu imóvel — com uma vistoria técnica sem custo.</p>
+    <div class="hero-ctas">
+      <a href="#contato" class="btn btn-accent">Agendar Vistoria Gratuita</a>
+      <a href="#riscos" class="btn btn-ghost">Ver Riscos Comuns ↓</a>
+    </div>
+
+    <div class="trust-strip">
+      <div class="trust-item"><span class="trust-dot">●</span><span><b>13 anos</b>de atuação em fiscalização, contratos e engenharia de infraestrutura</span></div>
+      <div class="trust-item"><span class="trust-dot">●</span><span><b>CREA 20.853/D-GO | CREA 25.576/D-GO | CREA 1019077042/D-GO</b>com visto ativo em CREA-DF</span></div>
+      <div class="trust-item"><span class="trust-dot">●</span><span><b>Anápolis e Região</b>atendimento presencial e relatório técnico assinado</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="riscos" id="riscos">
+  <div class="wrap">
+    <div class="sec-label mono">01 — Pontos de Atenção</div>
+    <h2 class="sec-title">A verdadeira segurança é contínua, não um evento único.</h2>
+    <p class="sec-desc">Interaja com as categorias abaixo para entender os pontos críticos que mais aparecem em vistorias reais.</p>
+
+    <div class="tabbar" role="tablist">
+      <button class="tabbtn active" data-tab="eletrica">Elétrica &amp; Gás</button>
+      <button class="tabbtn" data-tab="incendio">Combate a Incêndio</button>
+      <button class="tabbtn" data-tab="estrutura">Estrutura &amp; Infiltrações</button>
+      <button class="tabbtn" data-tab="sinalizacao">Sinalização &amp; Fuga</button>
+    </div>
+
+    <div class="tabpanel active" data-panel="eletrica">
+      <figure class="risco-media">
+        <img class="risco-img" src="imagens/eletrica.svg" alt="Quadro de instalações elétricas em vistoria">
+        <figcaption class="mono">FIG. 01 — INSTALAÇÕES ELÉTRICAS &amp; GÁS</figcaption>
+      </figure>
+      <ul class="risco-list">
+        <li>Quadros de energia desatualizados ou sem identificação correta.</li>
+        <li>Fiação exposta, ressecada ou com gambiarras.</li>
+        <li>Falta de aterramento adequado (SPDA / para-raios) ou de manutenção periódica.</li>
+        <li>Vazamentos ou má conservação nas tubulações de gás.</li>
+      </ul>
+    </div>
+
+    <div class="tabpanel" data-panel="incendio">
+      <figure class="risco-media">
+        <img class="risco-img" src="imagens/incendio.svg" alt="Extintor e equipamento de combate a incêndio">
+        <figcaption class="mono">FIG. 02 — COMBATE A INCÊNDIO</figcaption>
+      </figure>
+      <ul class="risco-list">
+        <li>Extintores vencidos, obstruídos ou fora do local correto.</li>
+        <li>Hidrantes e mangueiras sem teste de pressão, ou com vazamentos.</li>
+        <li>Alarmes e detectores de fumaça inoperantes ou sem testes periódicos.</li>
+        <li>Portas corta-fogo sem vedação adequada ou travadas abertas.</li>
+      </ul>
+    </div>
+
+    <div class="tabpanel" data-panel="estrutura">
+      <figure class="risco-media">
+        <img class="risco-img" src="imagens/estrutura.svg" alt="Fissura em parede ou infiltração estrutural">
+        <figcaption class="mono">FIG. 03 — ESTRUTURA &amp; INFILTRAÇÕES</figcaption>
+      </figure>
+      <ul class="risco-list">
+        <li>Sinais de infiltração, mofo ou umidade em paredes e tetos.</li>
+        <li>Fissuras, trincas ou rachaduras em vigas, pilares e lajes.</li>
+        <li>Corrosão em armaduras expostas ou estruturas metálicas.</li>
+        <li>Desgaste ou danos em revestimentos, pisos e fachadas.</li>
+      </ul>
+    </div>
+
+    <div class="tabpanel" data-panel="sinalizacao">
+      <figure class="risco-media">
+        <img class="risco-img" src="imagens/sinalizacao.svg" alt="Sinalização de saída de emergência e rota de fuga">
+        <figcaption class="mono">FIG. 04 — SINALIZAÇÃO &amp; ROTAS DE FUGA</figcaption>
+      </figure>
+      <ul class="risco-list">
+        <li>Rotas de fuga obstruídas por móveis, estoque ou lixo.</li>
+        <li>Sinalização de emergência apagada, danificada ou inexistente.</li>
+        <li>Iluminação de emergência que não funciona ou tem baixa autonomia.</li>
+        <li>Guarda-corpos e corrimãos frouxos, com altura inadequada ou corroídos.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="solucao" id="solucao">
+  <div class="wrap">
+    <div class="sec-label mono">02 — Nossa Solução</div>
+    <h2 class="sec-title">Um diagnóstico completo, sem custo e sem compromisso.</h2>
+    <p class="sec-desc" style="color:#9FB0C4;">Nossa equipe avalia todos os aspectos vitais da segurança do imóvel e entrega um relatório técnico com plano de ação — você decide o que e quando priorizar.</p>
+
+    <div class="chips">
+      <span class="chip">Acessibilidade</span>
+      <span class="chip">Estrutura</span>
+      <span class="chip">Sistema de Incêndio</span>
+      <span class="chip">Instalações Elétricas</span>
+      <span class="chip">Rotas de Fuga</span>
+      <span class="chip">Sistema de Gás</span>
+    </div>
+
+    <div class="counter-row">
+      <div>
+        <div class="counter" data-target="20">0</div>
+        <div class="counter-label">pontos críticos de segurança avaliados por vistoria</div>
+      </div>
+      <div>
+        <div class="counter" data-target="24">0</div>
+        <div class="counter-label">horas para retorno após a solicitação</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="servicos" id="servicos">
+  <div class="wrap">
+    <div class="sec-label mono">03 — Além da Vistoria</div>
+    <h2 class="sec-title">Enquanto isso, também resolvemos o que já apareceu.</h2>
+    <p class="sec-desc">A vistoria gratuita frequentemente revela pequenos reparos e ajustes. Cuidamos deles diretamente, sem precisar contratar outro fornecedor.</p>
+
+    <div class="grid4">
+      <div class="svcard">
+        <span class="num mono">01</span>
+        <h3>Instalações Elétricas</h3>
+        <p>Serviços elétricos, CFTV, alarmes e manutenção técnica especializada.</p>
+        <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20instala%C3%A7%C3%B5es%20el%C3%A9tricas.">Solicitar orçamento →</a>
+      </div>
+      <div class="svcard">
+        <span class="num mono">02</span>
+        <h3>Instalações Hidráulicas</h3>
+        <p>Reparos, instalações e manutenção com precisão técnica e sem desperdício.</p>
+        <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20instala%C3%A7%C3%B5es%20hidr%C3%A1ulicas.">Solicitar orçamento →</a>
+      </div>
+      <div class="svcard">
+        <span class="num mono">03</span>
+        <h3>Projetos &amp; PPCI</h3>
+        <p>Projetos de engenharia, prevenção contra incêndio (PPCI) e segurança do trabalho.</p>
+        <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20projetos%20de%20PPCI.">Solicitar orçamento →</a>
+      </div>
+      <div class="svcard">
+        <span class="num mono">04</span>
+        <h3>Acompanhamento de Obras</h3>
+        <p>Consultoria predial, vistorias técnicas e acompanhamento rigoroso de cronograma.</p>
+        <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20acompanhamento%20de%20obras.">Solicitar orçamento →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="processo">
+  <div class="wrap">
+    <div class="sec-label mono">04 — Como Funciona</div>
+    <h2 class="sec-title">Três etapas, do primeiro contato ao plano de ação.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n mono">passo 1</div>
+        <h3>Agendamento</h3>
+        <p>Você envia o formulário ou chama no WhatsApp. Confirmamos data e horário em até 24h.</p>
+      </div>
+      <div class="step">
+        <div class="n mono">passo 2</div>
+        <h3>Vistoria no local</h3>
+        <p>Avaliação técnica presencial, cobrindo elétrica, estrutura, incêndio, gás e rotas de fuga.</p>
+      </div>
+      <div class="step">
+        <div class="n mono">passo 3</div>
+        <h3>Relatório e plano de ação</h3>
+        <p>Você recebe os riscos priorizados e, se quiser, já contrata os reparos com a gente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="contato">
+  <div class="wrap">
+    <div class="sec-label mono" style="color:var(--accent);">05 — Comece Hoje</div>
+    <h2 class="sec-title" style="color:var(--white);">Proteja seu patrimônio antes que o risco vire prejuízo.</h2>
+
+    <div class="cta-grid">
+        <form action="https://formspree.io/f/moeqjzrk" method="POST">
+        <input type="hidden" name="_subject" value="Novo pedido de vistoria — site MDA Engenharia">
+        <div>
+          <label for="nome">NOME</label>
+          <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
+        </div>
+        <div>
+          <label for="tel">TELEFONE / WHATSAPP</label>
+          <input id="tel" name="tel" type="tel" placeholder="(62) 90000-0000" required>
+        </div>
+        <div>
+          <label for="empresa">EMPRESA / CONDOMÍNIO</label>
+          <input id="empresa" name="empresa" type="text" placeholder="Nome do estabelecimento">
+        </div>
+        <div>
+          <label for="email">E-MAIL</label>
+          <input id="email" name="_replyto" type="email" placeholder="voce@email.com">
+        </div>
+        <button type="submit" class="btn btn-accent" style="margin-top:8px;">Agendar Minha Vistoria Gratuita</button>
+        <p class="formnote">Formulário conectado via Formspree — ver passo a passo abaixo para ativar.</p>
+      </form>
+
+      <div>
+        <div class="whatsapp-inline">
+          Prefere resolver agora? Chame direto no <a href="https://wa.me/5562992914190?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20vistoria%20gratuita.">WhatsApp (62) 99291-4190</a> — resposta em até 24h.
+        </div>
+        <div class="whatsapp-inline" style="margin-top:14px;">
+          Prefere e-mail? Escreva para <a href="mailto:mdaengenharia.contato@gmail.com">mdaengenharia.contato@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footgrid">
+    <div>
+      <div class="footbrand">MDA Engenharia</div>
+      <div style="margin-top:6px;">CREA 20.853/D-GO | CREA 25.576/D-GO | CREA 1019077042/D-GO</div>
+      <div>Anápolis/GO | Brasília/DF | Goiânia/GO e Região</div>
+    </div>
+    <div>
+      <div>(61) 99386-2269</div>
+      <div>mdaengenharia.contato@gmail.com</div>
+    </div>
+    <div>
+      <a href="#riscos">Riscos Ocultos</a><br>
+      <a href="#servicos" style="display:inline-block;margin-top:6px;">Outros Serviços</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line-dark);font-size:0.78rem;color:#5E7089;">
+    © 2026 MDA Engenharia — Segurança Contínua.
+  </div>
+</footer>
+
+<script>
+  // Tabs
+  document.querySelectorAll('.tabbtn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector('[data-panel="'+btn.dataset.tab+'"]').classList.add('active');
+    });
+  });
+
+  // Counter animation
+  const counters = document.querySelectorAll('.counter');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.dataset.target,10);
+        let cur = 0;
+        const step = Math.max(1, Math.round(target/30));
+        const tick = ()=>{
+          cur += step;
+          if(cur >= target){ el.textContent = target; return; }
+          el.textContent = cur;
+          requestAnimationFrame(tick);
+        };
+        tick();
+        obs.unobserve(el);
+      }
+    });
+  },{threshold:0.5});
+  counters.forEach(c=>obs.observe(c));
+</script>
+
+</body>
+</html>
