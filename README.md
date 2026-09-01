@@ -41,7 +41,7 @@
   h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-0.01em;}
   .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:0.04em;}
   a{color:inherit;text-decoration:none;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  .wrap{max-width:1400px;margin:0 auto;padding:0 28px;}
   img,svg{display:block;max-width:100%;}
 
   /* focus visibility */
@@ -292,7 +292,7 @@
 
     <div class="tabpanel active" data-panel="eletrica">
       <figure class="risco-media">
-        <img class="risco-img" src="imagens/eletrica.svg" alt="Quadro de instalações elétricas em vistoria">
+        <img class="risco-img" src="imagens/eletrica.jpg" alt="Quadro de instalações elétricas em vistoria">
         <figcaption class="mono">FIG. 01 — INSTALAÇÕES ELÉTRICAS &amp; GÁS</figcaption>
       </figure>
       <ul class="risco-list">
@@ -305,7 +305,7 @@
 
     <div class="tabpanel" data-panel="incendio">
       <figure class="risco-media">
-        <img class="risco-img" src="imagens/incendio.svg" alt="Extintor e equipamento de combate a incêndio">
+        <img class="risco-img" src="imagens/incendio.jpg" alt="Extintor e equipamento de combate a incêndio">
         <figcaption class="mono">FIG. 02 — COMBATE A INCÊNDIO</figcaption>
       </figure>
       <ul class="risco-list">
@@ -318,7 +318,7 @@
 
     <div class="tabpanel" data-panel="estrutura">
       <figure class="risco-media">
-        <img class="risco-img" src="imagens/estrutura.svg" alt="Fissura em parede ou infiltração estrutural">
+        <img class="risco-img" src="imagens/estrutura.jpg" alt="Fissura em parede ou infiltração estrutural">
         <figcaption class="mono">FIG. 03 — ESTRUTURA &amp; INFILTRAÇÕES</figcaption>
       </figure>
       <ul class="risco-list">
@@ -331,7 +331,7 @@
 
     <div class="tabpanel" data-panel="sinalizacao">
       <figure class="risco-media">
-        <img class="risco-img" src="imagens/sinalizacao.svg" alt="Sinalização de saída de emergência e rota de fuga">
+        <img class="risco-img" src="imagens/sinalizacao.jpg" alt="Sinalização de saída de emergência e rota de fuga">
         <figcaption class="mono">FIG. 04 — SINALIZAÇÃO &amp; ROTAS DE FUGA</figcaption>
       </figure>
       <ul class="risco-list">
