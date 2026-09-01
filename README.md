@@ -41,7 +41,7 @@
   h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-0.01em;}
   .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:0.04em;}
   a{color:inherit;text-decoration:none;}
-  .wrap{max-width:1400px;margin:0 auto;padding:0 28px;}
+  .wrap{max-width:1620px;margin:0 auto;padding:0 28px;}
   img,svg{display:block;max-width:100%;}
 
   /* focus visibility */
