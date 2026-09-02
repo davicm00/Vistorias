@@ -106,6 +106,49 @@
   @media(min-width:720px){.navcta{display:inline-flex;}}
   .navlinks{display:none;}
   @media(min-width:900px){.navlinks{display:flex;}}
+  css
+/* PÁGINAS SEGMENTADAS — preservar paleta técnica atual do site */
+.segment-page { background: var(--paper); color: var(--ink); }
+.segment-hero { padding: 92px 0 80px; background: var(--bg-dark); color: var(--white); }
+.segment-hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr); gap: 60px; align-items: center; }
+.segment-eyebrow { color: var(--accent); font: 500 .76rem/1.2 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+.segment-hero h1 { max-width: 720px; margin: 18px 0 20px; font: 700 clamp(2.4rem, 5vw, 4.8rem)/.98 'Space Grotesk', sans-serif; }
+.segment-hero h1 em { color: var(--accent); font-style: normal; }
+.segment-hero p { max-width: 620px; color: #c7d2de; font-size: 1.06rem; line-height: 1.72; }
+.segment-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.segment-actions .btn { display: inline-flex; align-items: center; gap: 8px; }
+.segment-slab { padding: 28px; border: 1px solid var(--line-dark); background: rgba(22,39,59,.68); }
+.segment-slab .slab-label { color: var(--accent); font: .72rem 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+.segment-slab strong { display: block; margin-top: 15px; color: var(--white); font: 700 2rem/1.08 'Space Grotesk', sans-serif; }
+.segment-slab p { margin-top: 12px; font-size: .9rem; }
+.segment-proof { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); background: var(--paper); }
+.segment-proof > div { padding: 24px 28px; border-right: 1px solid var(--line); }
+.segment-proof > div:last-child { border-right: 0; }
+.segment-proof b { display: block; color: var(--ink); font: 700 .94rem 'Space Grotesk', sans-serif; }
+.segment-proof span { display: block; margin-top: 5px; color: var(--steel); font-size: .82rem; }
+.segment-content { padding: 84px 0; }
+.segment-content .section-head { max-width: 700px; }
+.segment-content h2 { margin-top: 12px; font: 700 clamp(1.8rem, 3.5vw, 2.8rem)/1.05 'Space Grotesk', sans-serif; }
+.segment-content .lead { max-width: 650px; margin-top: 16px; color: var(--steel); font-size: 1rem; }
+.segment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 42px; border: 1px solid var(--line); background: var(--line); }
+.segment-card { min-height: 245px; padding: 28px; background: var(--paper-2); }
+.segment-card .num { color: var(--accent); font: .76rem 'IBM Plex Mono', monospace; }
+.segment-card h3 { margin: 20px 0 10px; font-size: 1.2rem; }
+.segment-card p { color: var(--steel); font-size: .9rem; line-height: 1.65; }
+.segment-card ul { padding-left: 18px; margin-top: 13px; color: var(--steel); font-size: .84rem; line-height: 1.7; }
+.segment-next { display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-top: 45px; padding: 25px 28px; background: var(--paper); border-left: 3px solid var(--accent); }
+.segment-next p { max-width: 720px; color: var(--steel); font-size: .9rem; }
+.segment-next strong { color: var(--ink); }
+@media (max-width: 760px) {
+  .segment-hero { padding: 68px 0 56px; }
+  .segment-hero .wrap { grid-template-columns: 1fr; gap: 35px; }
+  .segment-hero h1 { font-size: 2.7rem; }
+  .segment-proof { grid-template-columns: 1fr; }
+  .segment-proof > div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .segment-grid { grid-template-columns: 1fr; }
+  .segment-next { display: block; }
+  .segment-next .btn { margin-top: 18px; }
+}
 
   /* ---------- HERO ---------- */
   .hero{padding:96px 0 88px;}
@@ -254,6 +297,12 @@
       <a href="#solucao">Vistoria Gratuita</a>
       <a href="#servicos">Outros Serviços</a>
       <a href="#contato">Contato</a>
+    <nav class="navlinks" aria-label="Públicos atendidos">
+      <a href="sindicos.html">Para síndicos</a>
+      <a href="administradoras.html">Para administradoras</a>
+      <a href="comercios.html">Para comércios</a>
+</nav>
+
     </nav>
     <a href="#contato" class="btn btn-accent btn-sm navcta">Agendar Vistoria</a>
   </div>
