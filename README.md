@@ -149,6 +149,37 @@
   .segment-next { display: block; }
   .segment-next .btn { margin-top: 18px; }
 }
+css
+/* FORMULÁRIO DE QUALIFICAÇÃO — 3 etapas curtas e sem dependência de backend */
+.lead-form { max-width: 820px; margin-top: 35px; padding: 30px; background: var(--paper-2); border: 1px solid var(--line); }
+.lead-form fieldset { min-width: 0; padding: 0; border: 0; }
+.lead-form legend { font: 700 1.65rem/1.1 'Space Grotesk', sans-serif; }
+.form-step-intro { max-width: 600px; margin: 11px 0 28px; color: var(--steel); font-size: .9rem; }
+.form-progress { display: grid; gap: 8px; margin-bottom: 31px; color: var(--steel); font: .68rem 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .06em; }
+.form-progress i { height: 3px; display: block; background: var(--line); }
+.form-progress b { display: block; width: 33%; height: 100%; background: var(--accent); transition: width .2s ease-out; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.lead-form label { display: grid; gap: 7px; color: var(--ink); font-size: .76rem; font-weight: 600; }
+.lead-form input:not([type="radio"]):not([type="checkbox"]), .lead-form select, .lead-form textarea { width: 100%; padding: 12px 13px; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 0; font: 400 .86rem 'IBM Plex Sans', sans-serif; }
+.lead-form textarea { resize: vertical; min-height: 102px; }
+.lead-form input::placeholder, .lead-form textarea::placeholder { color: #8b9299; }
+.lead-form input:focus, .lead-form select:focus, .lead-form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+.choice { display: flex !important; grid-template-columns: auto 1fr; gap: 11px !important; align-items: flex-start; padding: 14px; background: var(--paper); border: 1px solid var(--line); cursor: pointer; }
+.choice:has(input:checked) { background: #f5e4d5; border-color: var(--accent); }
+.choice input { margin-top: 3px; accent-color: var(--accent); }
+.choice span { display: grid; gap: 4px; }
+.choice b { font-size: .8rem; }
+.choice small { color: var(--steel); font-size: .72rem; line-height: 1.35; font-weight: 400; }
+.wide-label { margin-top: 18px; }
+.consent { display: flex !important; grid-template-columns: auto 1fr; align-items: flex-start; gap: 9px !important; margin-top: 22px; color: var(--steel) !important; font-size: .7rem !important; line-height: 1.45; font-weight: 400 !important; }
+.consent input { margin-top: 3px; accent-color: var(--accent); }
+.lead-form .btn { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; padding: 0 16px; margin-top: 25px; border: 1px solid transparent; font-weight: 600; cursor: pointer; }
+.form-navigation { display: flex; justify-content: space-between; gap: 12px; }
+.form-navigation .btn { margin-top: 25px; }
+.form-status { min-height: 1.2em; margin: 17px 0 0; color: var(--steel); font-size: .8rem; }
+.form-status.success { color: #25654f; }.form-status.error { color: #b2291e; }
+@media (max-width: 640px) { .lead-form { padding: 21px; }.form-grid, .choice-grid { grid-template-columns: 1fr; }.form-navigation { flex-direction: column-reverse; }.form-navigation .btn { width: 100%; } }
 
   /* ---------- HERO ---------- */
   .hero{padding:96px 0 88px;}
@@ -489,35 +520,68 @@
         <form action="https://formspree.io/f/moeqjzrk" method="POST">
         <input type="hidden" name="_subject" value="Novo pedido de vistoria — site MDA Engenharia">
         <div>
-          <label for="nome">NOME</label>
-          <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
-        </div>
-        <div>
-          <label for="tel">TELEFONE / WHATSAPP</label>
-          <input id="tel" name="tel" type="tel" placeholder="(62) 90000-0000" required>
-        </div>
-        <div>
-          <label for="empresa">EMPRESA / CONDOMÍNIO</label>
-          <input id="empresa" name="empresa" type="text" placeholder="Nome do estabelecimento">
-        </div>
-        <div>
-          <label for="email">E-MAIL</label>
-          <input id="email" name="_replyto" type="email" placeholder="voce@email.com">
-        </div>
-        <button type="submit" class="btn btn-accent" style="margin-top:8px;">Agendar Minha Vistoria Gratuita</button>
-        <p class="formnote">
-   
-      <div>
-        <div class="whatsapp-inline">
-          Prefere resolver agora? Chame direto no <a href="https://wa.me/5561993862269?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20vistoria%20gratuita.">WhatsApp (61) 99386-2269</a> — resposta em até 24h.
-        </div>
-        <div class="whatsapp-inline" style="margin-top:14px;">
-          Prefere e-mail? Escreva para <a href="mailto:mdaengenharia.contato@gmail.com">mdaengenharia.contato@gmail.com</a>
-        </div>
-      </div>
+       html
+<form id="lead-qualification-form" class="lead-form" novalidate>
+  <input type="hidden" name="source_page" id="source_page">
+  <input type="hidden" name="utm_source" id="utm_source">
+  <input type="hidden" name="utm_medium" id="utm_medium">
+  <input type="hidden" name="utm_campaign" id="utm_campaign">
+
+  <div class="form-progress" aria-live="polite"><span id="form-progress-label">Etapa 1 de 3</span><i><b id="form-progress-bar"></b></i></div>
+
+  <fieldset data-form-step="1">
+    <legend>Vamos entender o imóvel.</legend>
+    <p class="form-step-intro">As respostas ajudam a direcionar a conversa e indicar o próximo passo. Você não precisa ter conhecimento técnico.</p>
+    <div class="form-grid">
+      <label>Seu nome<input name="name" type="text" autocomplete="name" placeholder="Como podemos chamar você?" required></label>
+      <label>Telefone / WhatsApp<input name="phone" type="tel" autocomplete="tel" placeholder="(62) 90000-0000" required></label>
+      <label>Você fala em nome de
+        <select name="profile" id="lead-profile" required>
+          <option value="">Selecione uma opção</option>
+          <option value="sindico">Condomínio / síndico</option>
+          <option value="administradora">Administradora de condomínios</option>
+          <option value="comercio">Comércio ou empresa</option>
+          <option value="outro">Outro tipo de imóvel</option>
+        </select>
+      </label>
+      <label>Cidade do imóvel<input name="city" type="text" autocomplete="address-level2" placeholder="Ex.: Anápolis" required></label>
     </div>
-  </div>
-</section>
+    <button type="button" class="btn btn-accent form-next">Continuar →</button>
+  </fieldset>
+
+  <fieldset data-form-step="2" hidden>
+    <legend>Qual é a necessidade principal?</legend>
+    <p class="form-step-intro">Selecione o que melhor descreve a situação neste momento.</p>
+    <div class="choice-grid">
+      <label class="choice"><input type="radio" name="need" value="vistoria-inicial" required><span><b>Vistoria inicial</b><small>Quero identificar riscos e prioridades.</small></span></label>
+      <label class="choice"><input type="radio" name="need" value="laudo-relatorio"><span><b>Laudo ou relatório técnico</b><small>Preciso documentar uma condição do imóvel.</small></span></label>
+      <label class="choice"><input type="radio" name="need" value="incendio-ppci"><span><b>Incêndio / PPCI</b><small>Quero revisar prevenção e combate a incêndio.</small></span></label>
+      <label class="choice"><input type="radio" name="need" value="eletrica-gas"><span><b>Elétrica ou gás</b><small>Tenho uma suspeita ou necessidade de revisão.</small></span></label>
+      <label class="choice"><input type="radio" name="need" value="estrutura-infiltracao"><span><b>Estrutura / infiltração</b><small>Há sinais que precisam ser investigados.</small></span></label>
+      <label class="choice"><input type="radio" name="need" value="manutencao"><span><b>Manutenção ou acompanhamento</b><small>Quero organizar correções e continuidade.</small></span></label>
+    </div>
+    <label class="wide-label">Conte um pouco mais, se quiser<textarea name="context" rows="4" placeholder="Descreva o que aconteceu, há quanto tempo e se existe alguma urgência percebida."></textarea></label>
+    <div class="form-navigation"><button type="button" class="btn btn-outline-dark form-back">← Voltar</button><button type="button" class="btn btn-accent form-next">Continuar →</button></div>
+  </fieldset>
+
+  <fieldset data-form-step="3" hidden>
+    <legend>Qual é o melhor próximo passo?</legend>
+    <p class="form-step-intro">Vamos registrar sua preferência para a equipe responder de forma objetiva.</p>
+    <div class="form-grid">
+      <label>Prazo desejado
+        <select name="timing" required><option value="">Selecione uma opção</option><option value="entender-agora">Quero entender agora</option><option value="proximas-semanas">Nas próximas semanas</option><option value="proximo-mes">No próximo mês</option><option value="sem-prazo">Ainda estou pesquisando</option></select>
+      </label>
+      <label>Melhor canal
+        <select name="preferred_channel" required><option value="">Selecione uma opção</option><option value="whatsapp">WhatsApp</option><option value="telefone">Ligação</option><option value="email">E-mail</option></select>
+      </label>
+      <label class="wide-label">E-mail (opcional)<input name="email" type="email" autocomplete="email" placeholder="voce@email.com"></label>
+    </div>
+    <label class="consent"><input name="consent" type="checkbox" required><span>Autorizo o contato para tratar esta solicitação. Consulte o aviso de privacidade da empresa antes de publicar este formulário.</span></label>
+    <div class="form-navigation"><button type="button" class="btn btn-outline-dark form-back">← Voltar</button><button type="submit" class="btn btn-accent">Enviar e falar com a equipe →</button></div>
+  </fieldset>
+  <p id="lead-form-status" class="form-status" role="status" aria-live="polite"></p>
+</form>
+
 
 <footer>
   <div class="wrap footgrid">
@@ -572,6 +636,110 @@
     });
   },{threshold:0.5});
   counters.forEach(c=>obs.observe(c));
+</script>
+
+html
+<script>
+  (() => {
+    const form = document.querySelector('#lead-qualification-form');
+    if (!form) return;
+
+    const FORM_ENDPOINT = ''; // Ex.: endpoint do CRM/provedor de formulários, usando HTTPS.
+    const steps = [...form.querySelectorAll('[data-form-step]')];
+    const status = form.querySelector('#lead-form-status');
+    const progressLabel = form.querySelector('#form-progress-label');
+    const progressBar = form.querySelector('#form-progress-bar');
+    let current = 1;
+
+    const setHidden = (element, hidden) => {
+      element.hidden = hidden;
+      element.setAttribute('aria-hidden', String(hidden));
+    };
+
+    function updateStep(next) {
+      current = Math.max(1, Math.min(3, next));
+      steps.forEach((step) => setHidden(step, Number(step.dataset.formStep) !== current));
+      progressLabel.textContent = `Etapa ${current} de 3`;
+      progressBar.style.width = `${current * 33.333}%`;
+      const firstField = steps[current - 1].querySelector('input, select, textarea');
+      firstField?.focus();
+    }
+
+    function validateStep(stepNumber) {
+      const fields = [...steps[stepNumber - 1].querySelectorAll('input, select, textarea')];
+      const requiredFields = fields.filter((field) => field.required);
+      const hasMissing = requiredFields.some((field) => {
+        if (field.type === 'radio') return !steps[stepNumber - 1].querySelector(`input[name="${field.name}"]:checked`);
+        return !field.value.trim();
+      });
+      if (hasMissing) {
+        status.textContent = 'Preencha os campos obrigatórios para continuar.';
+        status.className = 'form-status error';
+        return false;
+      }
+      status.textContent = '';
+      status.className = 'form-status';
+      return true;
+    }
+
+    form.querySelectorAll('.form-next').forEach((button) => button.addEventListener('click', () => {
+      if (validateStep(current)) updateStep(current + 1);
+    }));
+    form.querySelectorAll('.form-back').forEach((button) => button.addEventListener('click', () => updateStep(current - 1)));
+
+    const params = new URLSearchParams(window.location.search);
+    const profile = params.get('perfil');
+    if (profile && form.querySelector(`#lead-profile option[value="${profile}"]`)) form.querySelector('#lead-profile').value = profile;
+    form.querySelector('#source_page').value = window.location.pathname;
+    ['utm_source', 'utm_medium', 'utm_campaign'].forEach((name) => { form.querySelector(`#${name}`).value = params.get(name) || ''; });
+
+    function collectData() {
+      return Object.fromEntries(new FormData(form).entries());
+    }
+
+    function buildWhatsAppMessage(data) {
+      return [
+        'Olá, quero falar sobre uma avaliação técnica.',
+        `Nome: ${data.name}`,
+        `Perfil: ${data.profile}`,
+        `Cidade: ${data.city}`,
+        `Necessidade: ${data.need}`,
+        `Prazo: ${data.timing}`,
+        `Canal preferido: ${data.preferred_channel}`,
+        data.context ? `Contexto: ${data.context}` : '',
+        data.email ? `E-mail: ${data.email}` : '',
+        `Origem: ${data.source_page}`
+      ].filter(Boolean).join('\\n');
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!validateStep(3)) return;
+      const data = collectData();
+      const submitButton = form.querySelector('[type="submit"]');
+      submitButton.disabled = true;
+      status.textContent = 'Enviando sua solicitação...';
+      status.className = 'form-status';
+
+      try {
+        if (FORM_ENDPOINT) {
+          const response = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) });
+          if (!response.ok) throw new Error('endpoint');
+        }
+        const message = encodeURIComponent(buildWhatsAppMessage(data));
+        window.open(`https://wa.me/5561993862269?text=${message}`, '_blank', 'noopener');
+        status.textContent = 'Solicitação preparada. Se o WhatsApp não abriu, use o botão ou ligue diretamente para a equipe.';
+        status.className = 'form-status success';
+        form.reset();
+        updateStep(1);
+      } catch (error) {
+        status.textContent = 'Não foi possível enviar agora. Tente novamente ou fale diretamente pelo WhatsApp.';
+        status.className = 'form-status error';
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  })();
 </script>
 
 </body>
