@@ -1,6 +1,6 @@
 # MDA Engenharia — pacote estático organizado
 
-A página principal é `index.html`. As páginas segmentadas são `sindicos.html`, `administradoras.html` e `comercios.html`. O estilo compartilhado está em `styles.css`; as interações, abas e formulário estão em `script.js`; os SVGs originais permanecem em `imagens/`.
+A página principal é `index.html`. As páginas segmentadas são `sindicos.html`, `administradoras.html` e `comercios.html`. O estilo compartilhado está em `styles.css`; as interações, abas e formulário estão em `script.js`; os SVGs originais foram ajustados para jpg.
 
 ## Publicação no GitHub Pages
 
@@ -12,7 +12,7 @@ O formulário funciona como triagem e prepara uma conversa no WhatsApp. Para arm
 
 ## Contatos
 
-O pacote preserva o telefone e o e-mail presentes no código anexado: `(62) 99291-4190` e `mdaengenharia.contato@gmail.com`. Confirme esses dados antes da publicação.
+O pacote preserva o telefone e o e-mail presentes no código anexado: `(61) 99386-2269` e `mdaengenharia.contato@gmail.com`. Confirme esses dados antes da publicação.
 
 ## Conteúdo demonstrativo
 
